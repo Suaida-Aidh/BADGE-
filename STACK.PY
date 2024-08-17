@@ -86,6 +86,26 @@ LL.peek()
 LL.print()
 
         
+# VALID PARENTHESIS
+def is_balanced(s):
+    stack = []
+    matching_parentheses = {')': '(', '}': '{', ']': '['}
+    
+    for char in s:
+        if char in matching_parentheses.values():
+            stack.append(char)
+        elif char in matching_parentheses.keys():
+            if stack == [] or matching_parentheses[char] != stack.pop():
+                return False
+    
+    return stack == []
+
+# Example usage
+print(is_balanced("({[]})"))  # True
+print(is_balanced("({[})"))   # False
+
+
+
 
 
 
@@ -106,5 +126,40 @@ def update(num,rep):
 
 update(10,0)
 print(arr)
+
+
+
+
+
+def reverse_words_with_stack(s):
+    # Step 1: Initialize an empty stack
+    stack = []
+    word = ''
+
+    # Step 2: Traverse the string and push words onto the stack
+    for char in s:
+        if char == ' ':
+            if word:  # When a space is encountered, push the current word onto the stack
+                stack.append(word)
+                word = ''
+        else:
+            word += char
+    
+    # Push the last word onto the stack (if any)
+    if word:
+        stack.append(word)
+    
+    # Step 3: Pop words from the stack to form the reversed string
+    reversed_string = ''
+    while stack:
+        reversed_string += stack.pop()
+        if stack:  # Add a space if there are more words to pop
+            reversed_string += ' '
+    
+    return reversed_string
+
+# Example usage
+input_string = 'MY NAME IS SUAIDA'
+print(reverse_words_with_stack(input_string))  # Output: 'SUAIDA IS NAME MY'
 
 
